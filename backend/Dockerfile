@@ -1,28 +1,27 @@
-# shopNow backend (Node.js API)
-
 FROM node:18-alpine
 
 WORKDIR /app
 
-# Install dependencies
+# Install production dependencies
 COPY package*.json ./
-RUN npm ci --only=production --no-audit --prefer-offline
+RUN npm ci --omit=dev --no-audit --prefer-offline
 
-# Copy app source
+# Copy application source
 COPY . .
 
-# Create non-root user
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-RUN chown -R appuser:appgroup /app
-USER appuser
+# Create non-root user with numeric UID
+RUN addgroup -S appgroup -g 1001 && \
+    adduser -S appuser -u 1001 -G appgroup
+
+# Give ownership to non-root user
+RUN chown -R 1001:1001 /app
+
+# Run as numeric non-root user
+USER 1001
 
 ENV NODE_ENV=production
 ENV PORT=5000
 
 EXPOSE 5000
 
-HEALTHCHECK --interval=15s --timeout=5s --start-period=5s --retries=3 \
-  CMD wget -qO- http://127.0.0.1:${PORT}/health || exit 1
-
-CMD ["node", "server.js"]
-
+CMD ["npm", "start"]

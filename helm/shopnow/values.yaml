@@ -1,0 +1,25 @@
+namespace: shopnow
+
+backend:
+  replicaCount: 2
+  image:
+    repository: sonalip1234/shopnow-backend
+    tag: "1.2"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 5000
+    targetPort: 5000
+  env:
+    PORT: "5000"
+
+frontend:
+  replicaCount: 2
+  image:
+    repository: sonalip1234/shopnow-frontend
+    tag: "1.2"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 80
