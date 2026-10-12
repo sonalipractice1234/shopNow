@@ -7,7 +7,7 @@ pipeline {
         BACKEND_IMAGE  = "${DOCKERHUB_USER}/shopnow-backend"
         FRONTEND_IMAGE = "${DOCKERHUB_USER}/shopnow-frontend"
 
-        IMAGE_TAG = '1.2'
+        IMAGE_TAG = '1.3'
 
         NAMESPACE = 'shopnow'
         HELM_CHART = './helm/shopnow'
