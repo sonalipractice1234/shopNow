@@ -1,0 +1,23 @@
+# Terraform generated files and sensitive state
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+
+# Local secrets
+kubernetes/mongodb/secret.yaml
+.env
+.env.*
+!.env.example
+
+# Temporary files
+jenkins/Jenkinsfile.backup
+jenkins/Jenkinsfilees
+
+# Terraform generated files and sensitive state
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
